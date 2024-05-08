@@ -1,0 +1,718 @@
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+img {
+    max-width: 100%;
+}
+</style>
+<style>
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#instructions-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+#instructions-box {
+ background:black;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 20px;
+  max-width: 400px;
+  text-align: center;
+}
+
+#instructions-box span {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+
+</style>
+</head>
+
+<title>Ghost Recon Breakpoint Operation Generator</title>
+<body style="background-image: url('./images/bgndblurred.jpg');background-repeat: repeat" text="ffffff"  link="ffffff" vlink="ffffff" alink="ffffff">
+
+<center> 
+<br><br>
+<a href="https://discord.gg/rgvy6Rfzrx" target="_blank">
+  <button type="button" style="font-family: arial; font-size: 80%; background-color: black; color: white; border: 1px solid white; border-radius: 1px;">
+    Join Ground Branch Task Force <br> the Breakpoint 'TACSIM/MILSIM' for PlayStation (only)
+  </button>
+</a>
+
+<br><br>
+
+
+<img src='./images/title.png' alt="Ghost Recon Breakpoint Operation Generator" style="width:300px;height:148px;border:1px solid gray">
+
+<br>
+<br>
+<button type="button" style="font-family: arial; font-size: 80%; background-color: black; color: white; border: 1px solid white; border-radius: 1px;" onclick="showInstructions()">Version 5.8 - CLICK FOR INSTRUCTIONS</button>
+
+<div id="instructions-overlay" onclick="hideInstructions()">
+  <div id="instructions-box">
+    
+<p style="font-family:arial;color:white"><u>Instructions (click again to close):</u></p>
+<p style="font-family:arial;color:white">
+
+1. Click on the underlined word "provinces" to view the locations of all regions on the map. This is helpful if you wish to select two provinces that are in close proximity.
+<br><br>
+2. Choose one or more provinces, specify the number of locations/objectives you want to randomize, and then click the "Generate random operation" button.
+<br><br>
+3. A random operation will be generated below. For each province selected you will find a map displaying all the main locations. This allows you to quickly visualize the placement of your random locations and also provides context about what surrounds them, should you want to add more afterwards.
+<br><br>
+4. Finally, you can click the "Copy ChatGPT prompt" button to copy to your clipboard a customized prompt that includes the randomized objectives. Paste the prompt into your personal <a href="https://chat.openai.com/" target="_blank">ChatGPT</a>, and it will generate a fairly comprehensive operation template to use as a starting point. Fine tune the prompt as needed and regenerate in ChatGPT a few times until you get good results/inspiration. This is very useful for sparking creativity.
+<br><br>
+
+Enjoy! 
+
+<br><br>
+Please feel free to share this tool.<br>I developed it with the intention of benefiting the entire Ghost Recon Breakpoint community.<br><br>With love, Kairos of GBTF.
+</p>
+  </div>
+</div>
+
+
+<h3 style="font-family:arial">Select one or more <b><u onclick="on()" style="font-size:110%">provinces</b></u></h3> 
+
+<div id="overlay" onclick="off()">
+<br><br><br>
+<img hidden id='provincesMap' src='./images/provincesMap.png' alt="provincesMap" style="width:600px;border:5px solid black">
+</div>
+
+<script>
+function on() {
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("provincesMap").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+ function showInstructions() {
+        document.getElementById("instructions-overlay").style.display = "flex";
+    }
+
+    function hideInstructions() {
+        document.getElementById("instructions-overlay").style.display = "none";
+    }
+</script>
+
+
+<select name="provinces" size='22' style="width: 286px;font-family:arial;background:black;color:white;border:1px solid gray" id="provinces" multiple>
+	<option value="Golem Island Sector 1">Golem Island Sector 1</option>
+	<option value="Golem Island Sector 2">Golem Island Sector 2</option>
+	<option value="Golem Island Sector 3">Golem Island Sector 3</option>
+	<option value="Cape North">Cape North</option>
+	<option value="Driftwood Islets">Driftwood Islets</option>
+	<option value="Smugglers Coves">Smugglers Coves</option>
+	<option value="Wild Coast">Wild Coast</option>
+	<option value="Mount Hodgson">Mount Hodgson</option>
+	<option value="Sinking Country">Sinking Country</option>
+	<option value="Whalers Bay">Whalers Bay</option>
+	<option value="Silent Mountain">Silent Mountain</option>
+	<option value="Fen Bog">Fen Bog</option>
+	<option value="New Argyll">New Argyll</option>
+	<option value="Channels">Channels</option>
+	<option value="Good Hope Mountain">Good Hope Mountain</option>
+	<option value="Lake Country">Lake Country</option>
+	<option value="Infinity">Infinity</option>
+	<option value="Seal Islands">Seal Islands</option>
+	<option value="Restricted Area 01">Restricted Area 01</option>
+	<option value="New Stirling">New Stirling</option>
+	<option value="Liberty">Liberty</option>
+	<option value="Windy Islands">Windy Islands</option>
+</select>
+<br>
+<h3 style="font-family:arial">Number of locations desired</h3>
+
+<form id="formNbrLocs" action="">
+  <input type="text" style="width: 278px;font-family:arial;background:black;color:white;border:1px solid gray" id="inputNumberOfLoc"><br><br><br>
+  <input type="button" id='generateButton' style="width: 285px;height:40px;font-family:arial;font-size:110%;background:black;color:white;border:1px solid gray" onclick="generateOp()" value="Generate random operation  ⚄">
+</form>
+
+<script>
+var input = document.getElementById("inputNumberOfLoc");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("generateButton").click();
+  }
+});
+</script>
+
+
+<script>
+	function generateOp() {
+		//Clean OPORD values
+		const opordBoxClear = document.getElementById('opordBox');
+		opordBoxClear.innerHTML = ''
+		
+		//Re-Hide Maps at start of new roll
+		document.getElementById("golemMap").style.display = "none";
+		document.getElementById("capenorthMap").style.display = "none";
+		document.getElementById("driftwoodisletsMap").style.display = "none";
+		document.getElementById("wildcoastMap").style.display = "none";
+		document.getElementById("smugglerscovesMap").style.display = "none";
+		document.getElementById("mounthodgsonMap").style.display = "none";
+		document.getElementById("sinkingcountryMap").style.display = "none";
+		document.getElementById("whalersbayMap").style.display = "none";
+		document.getElementById("silentMountainMap").style.display = "none";
+		document.getElementById("fenbogMap").style.display = "none";
+		document.getElementById("newargyllMap").style.display = "none";
+		document.getElementById("channelsMap").style.display = "none";
+		document.getElementById("goodhopemountainMap").style.display = "none";
+		document.getElementById("lakecountryMap").style.display = "none";
+		document.getElementById("infinityMap").style.display = "none";
+		document.getElementById("sealislandsMap").style.display = "none";
+		document.getElementById("restrictedarea01Map").style.display = "none";
+		document.getElementById("newstirlingMap").style.display = "none";
+		document.getElementById("libertyMap").style.display = "none";
+		document.getElementById("windyislandsMap").style.display = "none";
+		
+		
+		//Grab which provinces are selected
+		var provincesSelected = [];
+		for (var option of document.getElementById('provinces').options) {
+		if (option.selected) {
+		provincesSelected.push(option.value);
+		}
+		}
+		
+		//Stop if no provinces selected
+		if (provincesSelected.length < 1) {
+		alert('No provinces selected. Select one or more provinces.');
+		return;
+		}
+	
+		//Grab the 'Number of locations desired'
+		let numberOfLoc = document.getElementById("formNbrLocs").elements["inputNumberOfLoc"].value;
+
+		//Stop if no number provided
+		if (numberOfLoc.length < 1) {
+		alert('No number of locations desired provided. Provide a number.');
+		return;
+		}
+		
+		//Stop if number provided is not a number
+		if (isNaN(numberOfLoc)) {
+		alert(numberOfLoc + ' is not a valid number, provide a number.');
+		return;
+		}
+		
+		//Create arrays for provinces locations
+		const Golem1 = ['Ancient Harbor','Golem Island Sattelite Dish','Golem Island Heliport','Chemical Pipeline','Chemical Refinery'];  
+		const Golem2 = ["Golem Island Testing Zone ","Missile Site Ruins","Camp Phoenix","Camp Salamander","Forgotten Sanctuary"];
+		const Golem3 = ["Red Phoenix Outpost","Lava Shield","Lavaduct","Scandium Mine","No Man's Land","Prototype Workshop"];
+		const CapeNorth = ["Skell Foundation Campus","Darkwood Island Port","Bat SAM Site","Construction Site","Campus Data Farm","Underwater Cable Station","Campus Relay Station","A.I Experimental Center","Sentinel Corp. Location"];
+		const DriftwoodIslets = ["Driftwood Islets Testing Zone","Camp Kodiak","Ancient Sanctuary","Ancient Cemetery"];
+		const WildCoast = ["Electric Engine Factory","Outpost Blue Tiger","Toxic Storage Depot","Anchor Point Station","Drone Station W031","Engine R&D Center","Shark Bank Station","Control Station Tiger 01","Youth Spring","Wind Farm W03","Hybrid Engine Factory","Wild Coast Freight Yard","Storage Depot","Checkpoint Tiger Foxtrot","Ancient Harbor"];
+		const SmugglersCoves = ["Ancient Harbor","Maunga Nui Port","Smuggler Coves Freight Yard","Spanish Fortress","Drone Station W011","Wind Farm W01","Foxglove Station","Auroa Materials Deposit","Oleander Station","Polymorph Modeling","Outpost Red Tiger","Checkpoint Tiger Bravo","Checkpoint Tiger Charlie","Checkpoint Tiger Delta","Composite Factory","Emergency Center"];
+		const SinkingCountry = ["Ancient Harbor","Howard Airfield","Howard Port","Radar Station North","Anti-Aircraft Ruins","Harrier SAM Site","Osprey SAM Site","Sparrowhawk SAM Site","Sentinel Corp. Land Base","Equipment Depot","Ammunition Depot","Checkpoint Tiger Kilo","Checkpoint Tiger Golf","Checkpoint Tiger India","Checkpoint Tiger Juliet","Bunker Edgehod North","Bunker Edgehod South","Camp Tiger"];
+		const WhalersBay = ["Aconite Station","Checkpoint Weasel Charlie","Checkpoint Weasel Delta","Storage Depot","Mechanical R&D Center","Fanny Bay Port","Land Chassis Factory","Whalers Bay Airfield","Wind Farm W02","Drone Station W061","Blue Cove Station","Ancient Harbor","Construction Site","Checkpoint Weasel Echo","Air Chassis Factory"];
+		const MountHodgson = ["Bald Peak Mine","Chem-Extraction Complex","Silent Valley Mine","Drone Station W041","Checkpoint Tiger Echo","Mining Control Center"];
+		const FenBog = ["BlueCorp Startup","Andersons Farm","Longford Farm","Whitestone Farm","Airship Air Station","Shipping Center","Fen Bog Port","Recycling Facility","Photovoltaic Park W01","Fen Bog Testing Zone","Control Station Tiger 03","Checkpoint Tiger Bravo","Checkpoint Tiger Hotel","Drone Station W052","Control Station Tiger 02","Drone Station W051","Hogweed Station","Ancient Village"];
+		const GoodHopeMountain = ["Red Weasel Outpost","Checkpoint Weasel India","Camp Weasel","Checkpoint Weasel Hotel","Bunker Edgehod South","Natural Hazards Control","Auroa Survival Shelter","Drone Station W111","Auroa Weather Station","Checkpoint Weasel Alpha","Checkpoint Weasel Golf"];
+		const SilentMountain = ["Pumping Station","Auroa Data Farm","Battery Farm","Auroa Intranet Control","Submarine Cable Control","Hemlock Station","O'Connors Mine","Mathilda's Palace","Camp Black Widow","Drone Station W071"];
+		const NewArgyll = ["Control Station Tiger 04","Meal Packaging Center","Fish Processing Center","Cold Storage Center","New Argyll Winery","Juice Processing Center","Brewery","Long Valley Residences","Skell Estate","Outpost Black Tiger","Ancient Fort","Ancient Sacred Site"];
+		const Infinity = ["Skell Foundation Head Office","Checkpoint Viper Golf","Control Station Viper 04","Alpha Centauri Residences","Skell Security","Checkpoint Viper Delta","Skell Technology Head Office","Polaris Residences","Checkpoint Viper Charlie","Vega Residences","Infinity Medical Center","Checkpoint Viper Echo","Canopus District","Jace Skell Conference Hall","Rigel Residences","Sirius Residences","Outpost Green Viper","Auroa Eco-Museum","Antares District","Infinity Transport Hub","Auroa Airport"];
+		const Channels = ["Oceanic Power Plant","Ancient Village","Electric Grid Control","Channels R&D Center","Channels Port","Red Shark Outpost","Navy Fuelling Station","Cold War Ruins","Main Pumping Station","Auroa Power Plant","Step Up Startup","Vulture SAM Site","Checkpoint Shark Charlie","Eagle SAM Site","Sentinel Corp. Location"];
+		const RestrictedArea01 = ["Maintenance Area","Checkpoint Fox Charlie","Grandview Mansion","Construction Site","Checkpoint Fox Alpha","Control Station Viper 01","Camp Ferret","Outpost Red Ferret","Assembly Hall Omega 02","Checkpoint Weasel Bravo","Arrow Testing Zone","Checkpoint Ferret Bravo","Gold Trail Testing Zone","Gate 07","Gate 03","Nugget Cliff","Omega Operations","Checkpoint Fox Echo","Training Center","Gate 06","Gate 05","Stony Creek Village","Gate 04","Checkpoint Fox Delta","Devil Forest Gold Mine","Omega R&D Center","Assembly Hall Omega 01","Drone Station W161","Russell Gold Mine","Freeman Residences","Outpost Red Fox","Control Station Fox 01","Control Station Fox 02","Prototype Workshop","Camp Fox","Gate 02","Gate 01","Checkpoint Fox Charlie"];
+		const LakeCountry = ["Skell Security Assembly Hall","Ancient Village","Red Viper Outpost","Prototype Workshop","Checkpoint Viper Alpha","Skell Security R&D Center","Two Lakes Residences","Skell Security Operations","Maintenance Area","Ancient Fort","Camp Viper","Drone Station W121"];
+		const NewStriling = ["Dunback Farm","Forsyth Farm","Ardmore Farm","World SeedVault","Control Station Viper 03","New Stirling Freight Yard","Glenfield Farm","Drone Station W131","Checkpoint Viper Hotel","Ettrick Residences","Checkpoint Viper India","Sutherland Vineyard","Glenorchy Orchard","Agronomy Center","Kelso Farm","Mossburn Hopfield","Drone Station W132","Kinloch Farm","Control Station Viper 02","Burnside Orchard","Blue Viper Outpost","Checkpoint Viper Foxtrot","Checkpoint Viper Bravo","Ancient Village"];
+		const SealIslands = ["Fuel Storage","West Radar Station","Buzzard SAM Site","Anti Aircraft Battery","Emelius Port","Ammunition Storage","Owl SAM Site","Checkpoint Shark Alpha","Control Station Shark 01","Naval Base Auroa Airfield","Sentinel Corp. Naval Base","Falcon SAM Site","Shark Base","Camp Seal Cove","Abandoned Barracks","Checkpoint Shark Bravo","Condor SAM site"];
+		const Liberty = ["Jace Skell Dam","Auroa Solar Power Plant","Detention Center","Checkpoint Fox Foxtrot","John Dewey Residences","Maunga Nui Eco Park","Ayn Rand Residences","Frederic Bastiat Residences","Liberty Airport","Autumn Lake District","Liberty Port","Winter Park","Auroa Parliament","Parliament Shopping Street","Thomas Jefferson Residences","Adam Smith District","Construction Site (Liberty capital)","Construction Site (Liberty outskirts east)","Control Station Fox 01","Drone Station W191","East Park","Island District","Drone Station W192","Benjamin Franklin Residences","Liberty Transport Hub","Richard Cobden Residences","Jane Addams Residences","Control Station Fox 02","Ancient Fort","Checkpoint Fox Bravo","Auroa Hospital","Cryogenization Center","Cryohope","Eternity","Gate 06","Gate 05","Gate 07"];
+		const WindyIslands = ["Auroa Recycling Factory","Garbage Dump","Incineration Plant","Drone Station S01","Windy Islands Port"];
+
+
+		//For each provinces selected, build total array of possible locations to choose from
+		randomObjectives = null
+		randomObjectives = []; 
+		
+		provincesSelected.forEach(function callback(province) {
+		
+			if (province == 'Golem Island Sector 1') {
+			randomObjectives = randomObjectives.concat(Golem1)
+			}
+			
+			if (province == 'Golem Island Sector 2') {
+			randomObjectives = randomObjectives.concat(Golem2)
+			}
+			
+			if (province == 'Golem Island Sector 3') {
+			randomObjectives = randomObjectives.concat(Golem3)
+			}
+			
+			if (province == 'Cape North') {
+			randomObjectives = randomObjectives.concat(CapeNorth)
+			}
+						
+			if (province == 'Driftwood Islets') {
+			randomObjectives = randomObjectives.concat(DriftwoodIslets)
+			}
+						
+			if (province == 'Wild Coast') {
+			randomObjectives = randomObjectives.concat(WildCoast)
+			}
+						
+			if (province == 'Smugglers Coves') {
+			randomObjectives = randomObjectives.concat(SmugglersCoves)
+			}
+						
+			if (province == 'Sinking Country') {
+			randomObjectives = randomObjectives.concat(SinkingCountry)
+			}
+						
+			if (province == 'Whalers Bay') {
+			randomObjectives = randomObjectives.concat(WhalersBay)
+			}
+						
+			if (province == 'Mount Hodgson') {
+			randomObjectives = randomObjectives.concat(MountHodgson)
+			}
+						
+			if (province == 'Fen Bog') {
+			randomObjectives = randomObjectives.concat(FenBog)
+			}
+						
+			if (province == 'Good Hope Mountain') {
+			randomObjectives = randomObjectives.concat(GoodHopeMountain)
+			}
+						
+			if (province == 'Silent Mountain') {
+			randomObjectives = randomObjectives.concat(SilentMountain)
+			}
+						
+			if (province == 'New Argyll') {
+			randomObjectives = randomObjectives.concat(NewArgyll)
+			}
+						
+			if (province == 'Infinity') {
+			randomObjectives = randomObjectives.concat(Infinity)
+			}
+						
+			if (province == 'Channels') {
+			randomObjectives = randomObjectives.concat(Channels)
+			}
+						
+			if (province == 'Restricted Area 01') {
+			randomObjectives = randomObjectives.concat(RestrictedArea01)
+			}
+						
+			if (province == 'Lake Country') {
+			randomObjectives = randomObjectives.concat(LakeCountry)
+			}
+						
+			if (province == 'New Stirling') {
+			randomObjectives = randomObjectives.concat(NewStriling)
+			}
+						
+			if (province == 'Seal Islands') {
+			randomObjectives = randomObjectives.concat(SealIslands)
+			}
+						
+			if (province == 'Liberty') {
+			randomObjectives = randomObjectives.concat(Liberty)
+			}
+						
+			if (province == 'Windy Islands') {
+			randomObjectives = randomObjectives.concat(WindyIslands)
+			}
+			
+		});
+		
+		
+		// Shuffle total array
+		const shuffled = randomObjectives.sort(() => 0.5 - Math.random());
+		// Get sub-array of first numberOfLoc elements after shuffled
+		randomSelection = shuffled.slice(0, numberOfLoc);
+		//Remove duplicates (if numberOfLoc is more than number present in array, it would otherwise show duplicates of locations
+		randomSelection = randomSelection.filter(function (value, index, array) { 
+		return array.indexOf(value) === index;
+		});
+		
+		
+		//Build OPORD text from data and selections
+		
+		//HORIZONTAL DIVIDER LINE
+		const hrT = document.createElement('hr');
+		const opordBoxT = document.getElementById('opordBox');
+		opordBoxT.appendChild(hrT);
+		
+		//BLANK LINE
+		var br = document.createElement("br")
+		 opordBoxT.appendChild(br);
+		
+		//Generate random number of OPORD
+		function randomIntFromInterval(min, max) {
+		return Math.floor(Math.random() * (max - min + 1) + min)
+		}
+		const rndInt = randomIntFromInterval(1, 9999)
+		
+		//Pick a random codename
+const codenames = ['WIDOW','SPIDER','MAMBA','ADDER','APOLLO','AVALANCHE','BADGER','BANSHEE','GRIZZLY','BISHOP','BOOMER','BOAR','BERSERKER','BLACK KNIGHT','BREAKER','BUFFALO','CANARY','CORAL','COPPER','CRIMSON','CROW','DANGER','DAGGER','DINGO','DIAMOND','DRAGON','EAGLE','FIRESTICK','FOX','FIREFLY','GRIFFIN','GHOST','GOPHER','HARVESTER','HIGHLANDER','HUNTER','HOUND','HAWK','JACKSON','JESTER','KAHUNA','KEEPER','LANTERN','LYNX','LEOPARD','MAGE','MONARCH','MOTHER','OBELISK','OCELOT','ORACLE','OVERLORD','PAWN','PEQUOD','POLARIS','RAZOR','RED DRAGON','RED QUEEN','REAVER','RORK','RIPLEY','SABRE','SEAL','SHADOW','SHAMAN','SPARROW','SPECTRE','SPEARFISH','SPEAR','STONE','SWEEPER','TOMAHAWK','TIGER','HATCHET','UMBRA','UMBRELLA','VANDAL','VIPER','SNAKE','WARDEN','WANDERER','WARLOCK','WHITE WIZARD','WHITE RABBIT','X-RAY','ZEBRA','ZIPPER','TORCH','BLADE','TOXIC','MIST','SMOKE','AVALANCHE','AVATAR','ARCHER','ANIMA','BARRACUDA','BANSHEE','BLACKOUT','BLITZ','BLIZZARD','BOLT','BULLDOG','BUTCHER','CARNIVAL','CASTLE','CHARGER','COBRA','COMET','CRIMSON','CROW','CRUSADER','DAGGER','DARKSTAR','DISCIPLE','DRAGON','EAGLE','ECLIPSE','ENIGMA','EREBUS','EXCALIBUR','FALCON','FIRESTORM','FOX','FROST','FURY','GAMMA','GOLIATH','GLADIATOR','GHOST','GRIFFIN','GRINCH','GUARDIAN','HARRIER','HAVOC','HAZARD','HELLHOUND','HELIOS','HORUS','HYDRA','HUNTER','HURRICANE','HAMMER','INFERNO','IRONHIDE','IRONCLAD','IVORY','JAGUAR','JACKAL','JUGGERNAUT','KODIAK','KESTREL','KNIGHT','KUMA','LANCER','LIGHTNING','LYNX','MAGICIAN','MAMBA','MAVERICK','MARAUDER','MIRAGE','MONGOOSE','MUSTANG','NEBULA','NEMESIS','NIGHTHAWK','NIGHTSHADE','NEPTUNE','NOVA','OBSIDIAN','OMEGA','ONYX','ORACLE','ORION','OXIDE','OUTLAW','PANTHER','PALADIN','PHANTOM','PHOENIX','PUMA','PYRO','POSEIDON','QUAKER','RAPTOR','RAZOR','RAZORBACK','REAPER','RENEGADE','RIPTIDE','RONIN','RUBEDO','SABER','SAPPHIRE','SANDMAN','SANDSTORM','SCALER','SCORPION','SHADOW','SOLO','SPECTRE','SPITFIRE','STALKER','STORMRIDER','STRIKER','TALON','TEMPEST','THUNDER','TITAN','TYPHOON','UNDERTAKER','UNDERTOW','URSA','VALKYRIE','VENGEANCE','VENOM','VIGILANTE','VIPER','VORTEX','WARBRINGER','WARCRY','WARHAWK','WARLOCK','WARLORD','WARDEN','WHISPER','WIDOWMAKER','WOLVERINE','WRAITH','WYVERN','X-RAY','XERXES','YANKEE','YELLOWJACKET','YUKON','ZEUS','ZERO','ZEPHYR','ZODIAC'];
+		// Shuffle codenames array
+		const shuffledCodenames = codenames.sort(() => 0.5 - Math.random());
+		// Get first element from shuffled codenamesarray
+		codename = shuffledCodenames.slice(0, 1);
+		
+		
+					
+		 // Create a CHATGPT button element
+  var ChatGPTButton = document.createElement("button");
+    ChatGPTButton.style.width = "285px";
+	    ChatGPTButton.style.height = "40px";
+  ChatGPTButton.style.fontSize = "110%"; 
+  ChatGPTButton.style.background = "black"; 
+  ChatGPTButton.style.color = "white"; 
+  ChatGPTButton.style.border = "1px solid gray"; 
+
+  // Set the text content of the ChatGPTButton
+  ChatGPTButton.textContent = "Copy ChatGPT prompt 📋";
+
+  // Add an event listener to the ChatGPTButton
+  ChatGPTButton.addEventListener("click", function() {
+
+// Custom Prompt
+  var promptText = `You are now a MILSIM gaming operation writer. I will give you a template and instructions below framed by * *, please generate a realistic military operation with military lingo throughout and respect all instructions, especially the order (SITUATION AND MISSION first, CONCEPT OF OPERATION second, OBJECTIVES third). Throughout all the text refer to the team in the first person ('we') and don't split the team.
+OPERATION: opCodename
+
+SITUATION AND MISSION:
+*The section below framed by [] contains the locations the team needs to go to (each separated by a comma). Generate a storyline describing the situation the team needs to handle based on the objectives you will generate for each locations, be creative but use realistic military objectives. Ensure objectives are varied and richely detailed. Dont write separate paragraphs for each locations. Make sure the section framed by [] is NOT included in your output.
+[randomSelection]
+*
+
+CONCEPT OF OPERATION :
+*Generate a short paragraph describing how the team will leave HQ via helicopter and land in the AO, then we will move on with our objectives.*
+
+OBJECTIVES :
+*Generate a list of objectives based on the SITUATION AND MISSION paragraph you generated above. Each objective should be marked with letter like Alpha,Bravo,Charlie,etc. and be one very brief sentence. There should be the same number of objectives listed as there were items in the section framed by []*
+
+*Generate a list at the bottom of the operation named "---HVT profiles (integrate in the op as needed)---" containing a few HVT profiles to act as secondary objectives. Dont use a russian name for the HVT, only english male names.
+`;
+
+
+
+//include the actual codename and objectives rolled in the prompt to copy to clipboard
+var promptText = promptText.replace("opCodename", codename);
+var promptText = promptText.replace("randomSelection", randomSelection);
+
+
+    navigator.clipboard.writeText(promptText)
+      .then(() => {
+        alert('Custom prompt has been copied to the clipboard. Now go to your ChatGPT, paste the prompt, fine tune as needed and enjoy the magic! It is recommended you regenerate in ChatGPT a few times until you get a good result.');
+      })
+      .catch(err => {
+        console.error('Error copying prompt:', err);
+      });
+  });
+  
+opordBoxT.appendChild(ChatGPTButton);
+ var br = document.createElement("br")
+opordBoxT.appendChild(br);
+ var br = document.createElement("br")
+opordBoxT.appendChild(br);
+
+  
+		//OPORD NO.X
+		const opord = document.createElement('div');
+		opord.setAttribute(
+		'style',
+		'font-family:arial',
+		);
+		opord.textContent = 'OPORD '+rndInt;
+		const opordBox = document.getElementById('opordBox');
+		opordBox.appendChild(opord);
+		
+		//BLANK LINE
+		 var br = document.createElement("br")
+		 opordBox.appendChild(br);
+		
+		//CODENAME: X
+		const codenameLabel = document.createElement('div');
+		codenameLabel.setAttribute(
+		'style',
+		'font-family:arial',
+		);
+		codenameLabel.textContent = 'CODENAME: '+codename;
+		
+		opordBox.appendChild(codenameLabel);
+		
+		//BLANK LINE
+		 var br = document.createElement("br")
+		 opordBox.appendChild(br);
+		 
+		 //AREA OF OPERATIONS:
+		const ao = document.createElement('div');
+		ao.setAttribute(
+		'style',
+		'font-family:arial',
+		);
+		ao.textContent = 'AREA OF OPERATIONS:';
+		opordBox.appendChild(ao);
+		
+		//BLANK LINE
+		var br = document.createElement("br")
+		 opordBox.appendChild(br);
+		
+		//LIST PROVINCES SELECTED
+		provincesSelected.forEach(CreateTextAO);
+
+		function CreateTextAO(item) {
+		 const aoProvinces = document.createElement('div');
+		aoProvinces.setAttribute(
+		'style',
+		'font-family:arial',
+		);
+		aoProvinces.textContent = item;
+		opordBox.appendChild(aoProvinces);
+		}
+		
+		//BLANK LINE
+		var br = document.createElement("br")
+		opordBox.appendChild(br);
+				
+		//OBJECTIVES:
+		const objectives = document.createElement('div');
+		objectives.setAttribute(
+		'style',
+		'font-family:arial',
+		);
+		objectives.textContent = 'OBJECTIVES:';
+		opordBox.appendChild(objectives);						
+		
+		//BLANK LINE
+		var br = document.createElement("br")
+		opordBox.appendChild(br);		
+	
+		//LIST OBJECTIVES FROM THE RANDOM ROLL
+		randomSelection.forEach(CreateTextObjectives)
+		function CreateTextObjectives(item) {
+		 const objectiveslist = document.createElement('div');
+		objectiveslist.setAttribute(
+		'style',
+		'font-family:arial',
+		);
+		objectiveslist.textContent = item;
+		opordBox.appendChild(objectiveslist);
+		}
+		
+		//BLANK LINE
+		var br = document.createElement("br")
+		opordBox.appendChild(br);
+		
+		
+		
+		//SHOW MAP FOR EACH PROVINCES SELECTED		
+		provincesSelected.forEach(function showMaps(province) {
+
+			if ( province.match('Golem') ) {
+				document.getElementById("golemMap").style.display = "block";
+			}
+
+			if ( province.match('Cape North')  ) {
+				document.getElementById("capenorthMap").style.display = "block";
+			}
+			
+			if ( province.match('Driftwood Islets')  ) {
+				document.getElementById("driftwoodisletsMap").style.display = "block";
+			}
+			if ( province.match('Wild Coast')  ) {
+				document.getElementById("wildcoastMap").style.display = "block";
+			}
+				if ( province.match('Smugglers Coves')  ) {
+				document.getElementById("smugglerscovesMap").style.display = "block";
+			}
+			
+			if ( province.match('Mount Hodgson')  ) {
+				document.getElementById("mounthodgsonMap").style.display = "block";
+			}
+			
+			if ( province.match('Sinking Country')  ) {
+				document.getElementById("sinkingcountryMap").style.display = "block";
+			}
+			
+			if ( province.match('Whalers Bay')  ) {
+				document.getElementById("whalersbayMap").style.display = "block";
+			}
+				if ( province.match('Silent Mountain')  ) {
+				document.getElementById("silentMountainMap").style.display = "block";
+			}
+			if ( province.match('Fen Bog')  ) {
+				document.getElementById("fenbogMap").style.display = "block";
+			}
+			if ( province.match('New Argyll')  ) {
+				document.getElementById("newargyllMap").style.display = "block";
+			}
+				if ( province.match('Channels')  ) {
+				document.getElementById("channelsMap").style.display = "block";
+			}
+				if ( province.match('Good Hope Mountain')  ) {
+				document.getElementById("goodhopemountainMap").style.display = "block";
+			}
+				if ( province.match('Lake Country')  ) {
+				document.getElementById("lakecountryMap").style.display = "block";
+			}
+			if ( province.match('Infinity')  ) {
+				document.getElementById("infinityMap").style.display = "block";
+			}
+				
+			if ( province.match('Seal Islands')  ) {
+				document.getElementById("sealislandsMap").style.display = "block";
+			}
+			
+			
+			if ( province.match('Restricted Area 01')  ) {
+				document.getElementById("restrictedarea01Map").style.display = "block";
+			}
+			
+			
+			if ( province.match('New Stirling')  ) {
+				document.getElementById("newstirlingMap").style.display = "block";
+			}
+			
+			if ( province.match('Liberty')  ) {
+				document.getElementById("libertyMap").style.display = "block";
+			}
+			if ( province.match('Windy Islands')  ) {
+				document.getElementById("windyislandsMap").style.display = "block";
+			}
+
+			}
+		);
+
+		
+
+		
+		//HORIZONTAL DIVIDER LINE
+		//const hr = document.createElement('hr');
+		//opordBox.appendChild(hr);
+		
+		//SHOW HR divider before spices list
+		var spiceListdivider = document.getElementById("spiceListdivider");
+		spiceListdivider.style.display = "block";
+					
+		//SHOW THE SPICES LIST
+		var spicesList = document.getElementById("spicesList");
+		spicesList.style.display = "block";
+		
+		//SHOW THE BOTTOM LOGO
+		document.getElementById("logoBottom").style.display = "block";
+		
+		//REAPPLY THE BACXGROUND IMG SO IT DOESN'T CUT AND REPEAT AFTER THE BUTTON
+		 document.body.style.background = "url('./images/bgndblurred.jpg') repeat";
+		
+		
+		//SCROLL DOWN A BIT FOR EASIER READING - disabled
+		//window.scrollBy(0,200);
+	
+		
+	}
+</script>
+
+<br>
+
+<div id="opordBox"></div>
+
+<img hidden id='golemMap' src='./images/golemMap.png' alt="golemMap" style="width:500px;border:5px solid black">
+<img hidden id='capenorthMap' src='./images/capenorthMap.png' alt="capenorthMap" style="width:500px;border:5px solid black">
+<img hidden id='driftwoodisletsMap' src='./images/driftwoodisletsMap.png' alt="driftwoodisletsMap" style="width:500px;border:5px solid black">
+<img hidden id='wildcoastMap' src='./images/wildcoastMap.png' alt="wildcoastMap" style="width:500px;border:5px solid black">
+<img hidden id='smugglerscovesMap' src='./images/smugglerscovesMap.png' alt="smugglerscovesMap" style="width:500px;border:5px solid black">
+<img hidden id='mounthodgsonMap' src='./images/mounthodgsonMap.png' alt="mounthodgsonMap" style="width:500px;border:5px solid black">
+<img hidden id='sinkingcountryMap' src='./images/sinkingcountryMap.png' alt="sinkingcountryMap" style="width:500px;border:5px solid black">
+<img hidden id='whalersbayMap' src='./images/whalersbayMap.png' alt="whalersbayMap" style="width:500px;border:5px solid black">
+<img hidden id='silentMountainMap' src='./images/silentmountainMap.png' alt="silentMountainMap" style="width:500px;border:5px solid black">
+<img hidden id='fenbogMap' src='./images/fenbogMap.png' alt="fenbogMap" style="width:500px;border:5px solid black">
+<img hidden id='newargyllMap' src='./images/newargyllMap.png' alt="newargyllMap" style="width:500px;border:5px solid black">
+<img hidden id='channelsMap' src='./images/channelsMap.png' alt="channelsMap" style="width:500px;border:5px solid black">
+<img hidden id='goodhopemountainMap' src='./images/goodhopemountainMap.png' alt="goodhopemountainMap" style="width:500px;border:5px solid black">
+<img hidden id='lakecountryMap' src='./images/lakecountryMap.png' alt="lakecountryMap" style="width:500px;border:5px solid black">
+<img hidden id='infinityMap' src='./images/infinityMap.png' alt="infinityMap" style="width:500px;border:5px solid black">
+<img hidden id='sealislandsMap' src='./images/sealislandsMap.png' alt="sealislandsMap" style="width:500px;border:5px solid black">
+<img hidden id='restrictedarea01Map' src='./images/restrictedarea01Map.png' alt="restrictedarea01Map" style="width:500px;border:5px solid black">
+<img hidden id='newstirlingMap' src='./images/newstirlingMap.png' alt="newstirlingMap" style="width:500px;border:5px solid black">
+<img hidden id='libertyMap' src='./images/libertyMap.png' alt="libertyMap" style="width:500px;border:5px solid black">
+<img hidden id='windyislandsMap' src='./images/windyislandsMap.png' alt="windyislandsMap" style="width:500px;border:5px solid black">
+
+<br>
+
+
+ <hr hidden id='spiceListdivider'>
+ 
+ <p hidden style="font-family:arial" id='spicesList'>
+ <!-- <img hidden id='logoBottom' src='./images/logo.png' alt="logo" style="width:250px;border:5px solid DarkOliveGreen"> -->
+ 
+"SPICES" LIST<br><br>
+    
+The generator won't automatically select one to offer more freedom. However, you can refer to the list below for ideas on defining and adding flair to your operation:<br><br>
+• Rules of Engagement (Less than lethal force only, Only open fire if fired upon, Minimize damage to buildings, Avoid all enemy contact recon only, Lethal force authorized on all hostiles, No civilian casualties etc.)<br><br>
+• Hit multiple locations at once (Hack into comms relay to unlock servers elsewhere, destroy two servers simultaneously to prevent a backup, etc.)<br><br>
+• Plant beacon on vehicle or crates to find where they get delivered (then follow up with another OP)<br><br>
+• Interrogation / Intel mission only (find intel, interrogate enemies but don’t kill anyone, LTL only)<br><br>
+• Chemical/Biological Threat: Respond to chemical or biological threats by securing contaminated areas. (AMBER RUIN WORLD PARAMETER)<br><br>
+• Electronic Warfare: Disrupt enemy communications and radar systems to create chaos.<br><br>
+• Disinformation Campaign: Spread false intel on their networks to mislead enemy forces or sow discord among their ranks.<br><br>
+• EOD : ldentify and disarm enemy improvised explosive devices along key routes or in buildings (pretend there are charges on bridges, buildings, roads, etc.)<br><br>
+• Humanitarian Aid: Deliver aid supplies (trucks) to civilian populations while neutralizing hostile forces who are terrorizing innocents.<br><br>
+• Operation by convoy (travel in convoy formation and gather supplies, protect your convoy)<br><br>	 
+• Survival mode (Start with only a pistol and survive, pick up gear in bases or off enemy)<br><br>
+• Time Limit (objectives must be completed before X event happens in X time)<br><br>
+• Equipment restrictions (No NVGs, No Silencers, Specific weapons, etc.)<br><br>
+• Leave no trace (full stealth, hide bodies, clean sites or your presence)<br><br>
+• Full stealth requirement (no detection or mission failed)<br><br>
+• Road ambushes on the enemy (C4, Mines, EMPs etc.)<br><br>
+• No fly zone/radar (ground VHC only for transport)<br><br>
+• Covert operation with indigenous gear (dress low-profile as locals)<br><br>
+• Find what enemy has been smuggling at locations<br><br>
+• SCUBA gear / HELOCAST infil when near water<br><br>
+• Extract HVT alive, bring him in for interrogation<br><br>
+• Take down HVT making it look like an accident<br><br>
+• Add drone patrol sites around your objectives<br><br>
+• Wiretap enemy comms (antennas, cellphones, computers...without getting seen)<br><br>
+• Ground assault / Motorized patrol (APC, armored vehicles)<br><br>
+• Use the strike designator (Close-air support on-demand type of mission)<br><br>
+• Aerial assault (Attack helicopters)<br><br>
+• Sabotage vehicle or equipment<br><br>
+• Hack an equipement<br><br>
+• Save civilians<br><br>
+• Acquire Intel<br><br>
+
+Your imagination is the limit,<br>
+hopefully that list is a good reminder.<br>
+Good luck out there.<br>
+</p>
+
+<br>
+</center> 
+
+</body>
+
+</html>
+
