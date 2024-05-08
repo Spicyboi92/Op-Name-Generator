@@ -85,10 +85,43 @@
         $(document).ready(function () {
             var index = 0;
             var optype = 0;
+            
+            // 'Jungle', 'Swamp', 'Cajun', 'Primal', 'Silent', 'Savage'
+            var tempProvinceDescArray =
+                [['Cold', 'Silent', 'Frozen', 'High', 'Glacial', 'Forbidden', 'Frigid', 'Winter', 'Snow', 'White'], // Mount Hodgson
+                ['Sinking', 'Jungle', 'Cajun', 'Tropical', 'Bootleg', 'Rainy', 'Cloudy', 'Green'], // Sinking Country
+                ['Sinking', 'Foggy', 'Swamp', 'Failing', 'Submerged', 'Green', 'Stone'], // Fen Bog
+                ['Urban', 'Rough', 'Hard', 'Steel', 'Tan', 'Black', 'Violent', 'Harsh'], // New Argyll
+                ['Silent', 'High', 'Cold', 'Frozen', 'White', 'Glacial', 'Frigid', 'Tundra'], // Silent Mountain
+                ['Wild', 'Hard', 'Harsh', 'Crazy', 'Red', 'Hot', 'Rough', 'Violent', 'Cryptic'], // Wild Coast
+                ['Belligerent', 'Infinite', 'Cheating', 'Black', 'Bronze', 'Endless', 'Limitless', 'Impenetrable', 'Downtrodden'], // Infinity
+                ['Insane', 'Angered', 'Aggressive', 'Silent', 'Sleeping', 'Aware', 'Hostile'], // Whalers Bay
+                ['Pierced', 'Blue', 'Tropic', 'Hot', 'Disguised', 'Cryptic'], // Manga Nui Islands
+                ['Endless', 'Pierced', 'Gold', 'Ferocious', 'Serene', 'Green', 'Bleeding'], // Lake Counry
+                ['Beeding', 'Wounded', 'Pounding', 'Hopeless', 'Senseless', 'Remote', 'Hidden'], // Good Hope Mountain
+                ['Relentless', 'Impaled', 'Barbaric', 'Serene', 'Gold', 'Restrained', 'Silver', 'Urban', 'Restricted', 'Tribal'], // Restricted Area 1
+                ['New', 'Dead', 'Sleeping', 'Clever', 'Bronze', 'Stone', 'Steady', 'Martyred'], // New Stirling
+                ['Old', 'Hidden', 'Secret', 'Concealed', 'Invisible', 'Shrouded', 'Bohemian'], // Channels
+                ['Scattered', 'Shattered', 'Glass', 'Shielded', 'Readied', 'Brown', 'Copper'], // Seal Islands
+                ['Freed', 'Sovereign', 'Uncaged', 'Caged', 'Confined', 'Independent', 'Tribal', 'Urban'], // Liberty
+                ['Sleeping', 'Harsh', 'Dead', 'Dying', 'Terrified', 'Bloodied', 'Wounded', 'Turqoise', ], // Cape North
+                ['Dark', 'Black', 'Hidden', 'Concealed', 'Pierced', 'Gold', 'Island', 'Lone'], // Darkwood Island
+                ['Drifting', 'Hanging', 'Swinging', 'Raised', 'Soaring', 'Blue', 'Purple', 'Mysterious'], // Driftwood Islet
+                ['Windy', 'Blowing', 'Heavy', 'Flying', 'Hushed', 'Supressed', 'Hushed', 'Noiseless', 'Peaceful'], // Windy Islands
+                ['Concealed', 'Hazy', 'Heavy', 'Foggy', 'Purple', 'Mysterious'], // Egg Islands
+                ['Red', 'Black', 'Ultimate', 'Final', 'Impending', 'Imminent', 'Nearing']]; // Golem Island
+
+            // inclusive max and min random #: Math.floor(Math. random() * (tempProvinceDescArray[0].length - 0 + 1)) + 0;
+
+            // nouns add: smoke, haze, dust, spider, monkey, horse, Warfare, violence, tyrant, giant, veill, shield, sacrifice, light, night, Bastion, weapon, hand, Claymore
+            // Artilery, Storm, alert, siren, albatross, Kraken
             var provinceDesc = ['Cold', 'Jungle', 'Swamp', 'Cajun', 'Primal', 'Silent', 'Savage',
                 'Relentless', 'Impaled', 'Barbaric', 'Serene', 'White', 'Restrained', 'Silver',
                 'Drenched', 'Naval', 'Independent', 'Back', 'Blue', 'Clever', 'Persistent', 'Steady', 'Martyred'];
-            var typeNoun = ['Assault', 'Trident', 'Death', 'Thunder', 'Banshee', 'Charger',
+
+            var typeNoun = ['Assault', 'Trident', 'Death', 'Thunder', 'Banshee', 'Charger', 'Smoke', 'Haze', 'Dust', 'Spider', 'Monkey', 'Horse', 'Warfare',
+                'Violence', 'Tyrant', 'Giant', 'Veil', 'Barbarian', 'Shield', 'Sacrifice', 'Light', 'Night', 'Bastion', 'Weapon', 'Hand', 'Head', 'Arms', 'Hands', 'Claymore',
+                'Artillery', 'Balista', 'Storm', 'Alert', 'Siren', 'Albatross', 'Bear', 'Kraken', 'Krypted',
                 'Sender', 'Tiger', 'Lightening', 'Sword', 'Dagger', 'Badger', 'Rabbit', 'Reaper', 'Predator', 'Shark', 'Hitman', 'Longhorn', 'Eagle']
 
             $('#next1').on("click", function () {
@@ -104,8 +137,9 @@
                 index = parseInt($('#provinceDropdown').find(":selected").val());
                 optype = parseInt($('#assaultDropdown').find(":selected").val());
 
-                var verb = provinceDesc[index];
-                var nounIndex = Math.floor(Math.random() * 18);
+                var ranIndex = Math.floor(Math.random() * (tempProvinceDescArray[index].length - 0 + 1)) + 0;
+                var verb = tempProvinceDescArray[index][ranIndex];
+                var nounIndex = Math.floor(Math.random() * typeNoun.length);
                 var noun = typeNoun[nounIndex]
 
                 $('#opName').text('Operation ' + verb + ' ' + noun);
