@@ -3,9 +3,122 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>GRBP OP NAME GENERATOR</title>
+    <style>
+        body {
+            background-image: url('https://wallpapercave.com/wp/wp6068836.jpg');
+            background-size: cover;
+            color: lightgrey;
+        }
+    </style>
 </head>
 <body>
-    Hello World!
+    <center>
+        <div id="opdiv" style="display: none; margin-top: 100px; margin-bottom: 100px">
+            <h1 id="opName"></h1>
+        </div>
+        <div id="main">
+            <h1>GHOST RECON BREAKPOINT</h1>
+            <h2>OP NAME GENERATOR</h2>
+            <br />
+            <br />
+            <br />
+            <div class="form-group" id="provinceDiv">
+                <label for="provinceText">Province</label>
+                <select name="provinceDropdown" id="provinceDropdown" aria-describedby="provDesc" class="form-control" style="width: 200px; background-color: lightgray;">
+                    <option value="0">Mount Hodgson</option>
+                    <option value="1">Smuggler Coves</option>
+                    <option value="2">Sinking Country</option>
+                    <option value="3">Fen Bog</option>
+                    <option value="4">New Argyll</option>
+                    <option value="5">Silent Mountain</option>
+                    <option value="6">Wild Coast</option>
+                    <option value="7">Infinity</option>
+                    <option value="8">Whalers Bay</option>
+                    <option value="9">Maunga Nui Island</option>
+                    <option value="10">Lake Country</option>
+                    <option value="11">Good Hope Mountain</option>
+                    <option value="12">Restricted Area 01</option>
+                    <option value="13">New Stirling</option>
+                    <option value="14">Channels</option>
+                    <option value="15">Seal Islands</option>
+                    <option value="16">Liberty</option>
+                    <option value="17">Cape North</option>
+                    <option value="18">Darkwood Island</option>
+                    <option value="19">Driftwood Islets</option>
+                    <option value="20">Windy Islands</option>
+                    <option value="21">Egg Island</option>
+                    <option value="22">Golem Island</option>
+                </select>
+                <small id="provDesc" style="color: lightgray;" class="form-text text-muted">Select the province your Op will take place</small>
+            </div>
+            <br />
+            <div class="form-group" id="AssaultDiv" style="display: none;">
+                <label for="provinceText">Type of Operation</label>
+                <select name="assaultDropdown" id="assaultDropdown" aria-describedby="assaultDesc" class="form-control" style="width: 200px; background-color: lightgray;">
+                    <option value="0">Direct Action</option>
+                    <option value="1">High Value Target</option>
+                    <option value="2">Hostage Rescue</option>
+                    <option value="3">Air Assault</option>
+                    <option value="4">Unconventional Warfare</option>
+                    <option value="5">Raid</option>
+                </select>
+                <small id="assaultDesc" style="color: lightgray;" class="form-text text-muted">Select the mission type</small>
+            </div>
+            <br />
+            <button id="next1" type="button" class="btn btn-primary">Next</button>
+            <button id="genBtn" type="button" class="btn btn-primary" style="display: none;">Generate</button>
+        </div>
+        <button id="restartBtn" type="button" class="btn btn-primary" style="display: none;">Restart</button>
+    </center>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var index = 0;
+            var optype = 0;
+            var provinceDesc = ['Cold', 'Jungle', 'Swamp', 'Cajun', 'Primal', 'Silent', 'Savage',
+                'Relentless', 'Impaled', 'Barbaric', 'Serene', 'White', 'Restrained', 'Silver',
+                'Drenched', 'Naval', 'Independent', 'Back', 'Blue', 'Clever', 'Persistent', 'Steady', 'Martyred'];
+            var typeNoun = ['Assault', 'Trident', 'Death', 'Thunder', 'Banshee', 'Charger',
+                'Sender', 'Tiger', 'Lightening', 'Sword', 'Dagger', 'Badger', 'Rabbit', 'Reaper', 'Predator', 'Shark', 'Hitman', 'Longhorn', 'Eagle']
+
+            $('#next1').on("click", function () {
+                $('#next1').hide();
+                $('#genBtn').show();
+                $('#AssaultDiv').show();
+            });
+
+            $('#genBtn').on("click", function () {
+                $('#main').hide();
+                $('#opName').show();
+
+                index = parseInt($('#provinceDropdown').find(":selected").val());
+                optype = parseInt($('#assaultDropdown').find(":selected").val());
+
+                var verb = provinceDesc[index];
+                var nounIndex = Math.floor(Math.random() * 18);
+                var noun = typeNoun[nounIndex]
+
+                $('#opName').text('Operation ' + verb + ' ' + noun);
+                $('#opdiv').fadeIn(3000);
+                $('#restartBtn').fadeIn(3000);
+            });
+
+            $('#restartBtn').on("click", function () {
+                $('#main').show();
+                $('#next1').show();
+                $('#AssaultDiv').hide();
+                $('#genBtn').hide();
+                $('#restartBtn').hide();
+                $('#opName').hide();
+            });
+        });
+    </script>
+
 </body>
 </html>
