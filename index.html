@@ -65,8 +65,9 @@
                     <option value="1">High Value Target</option>
                     <option value="2">Hostage Rescue</option>
                     <option value="3">Air Assault</option>
-                    <option value="4">Unconventional Warfare</option>
-                    <option value="5">Raid</option>
+                    <option value="4">Sea Assault</option>
+                    <option value="5">Unconventional Warfare</option>
+                    <option value="6">Raid</option>
                 </select>
                 <small id="assaultDesc" style="color: lightgray;" class="form-text text-muted">Select the mission type</small>
             </div>
@@ -119,10 +120,13 @@
                 'Relentless', 'Impaled', 'Barbaric', 'Serene', 'White', 'Restrained', 'Silver',
                 'Drenched', 'Naval', 'Independent', 'Back', 'Blue', 'Clever', 'Persistent', 'Steady', 'Martyred'];
 
-            var typeNoun = ['Assault', 'Trident', 'Death', 'Thunder', 'Banshee', 'Charger', 'Smoke', 'Haze', 'Dust', 'Spider', 'Monkey', 'Horse', 'Warfare',
-                'Violence', 'Tyrant', 'Giant', 'Veil', 'Barbarian', 'Shield', 'Sacrifice', 'Light', 'Night', 'Bastion', 'Weapon', 'Hand', 'Head', 'Arms', 'Hands', 'Claymore',
-                'Artillery', 'Balista', 'Storm', 'Alert', 'Siren', 'Albatross', 'Bear', 'Kraken', 'Krypted',
-                'Sender', 'Tiger', 'Lightening', 'Sword', 'Dagger', 'Badger', 'Rabbit', 'Reaper', 'Predator', 'Shark', 'Hitman', 'Longhorn', 'Eagle']
+            var typeNoun = [['Assault', 'Trident', 'Death', 'Hand', 'Head', 'Banshee', 'Charger', 'Smoke'], // Direct Action
+                ['Haze', 'Dust', 'Spider', 'Giant', 'Monkey', 'Horse', 'Pentacle', 'Tyrant'], // High Value Target 
+                ['Violence','Veil', 'Barbarian', 'Shield', 'Sacrifice', 'Light', 'Night'], // Hostage Rescue
+                ['Bastion', 'Weapon', 'Thunder', 'Lightening', 'Artillery', 'Arms', 'Hands', 'Claymore'], // Air Assault
+                ['Balista', 'Shark', 'Storm', 'Alert', 'Siren', 'Albatross', 'Bear'], // Sea Assault
+                ['Kraken', 'Krypted', 'Sender', 'Tiger', 'Sword', 'Dagger', 'Badger', 'Warfare'], // Unconventional Warfare
+                ['Rabbit', 'Reaper', 'Predator', 'Hitman', 'Longhorn', 'Eagle', 'Usurper', 'Oppressor']]; // Raid
 
             $('#next1').on("click", function () {
                 $('#next1').hide();
@@ -137,7 +141,7 @@
                 index = parseInt($('#provinceDropdown').find(":selected").val());
                 optype = parseInt($('#assaultDropdown').find(":selected").val());
 
-                var ranIndex = Math.floor(Math.random() * (tempProvinceDescArray[index].length - 0 + 1)) + 0;
+                var ranIndex = Math.floor(Math.random() * tempProvinceDescArray[index].length);
                 var verb = tempProvinceDescArray[index][ranIndex];
                 var nounIndex = Math.floor(Math.random() * typeNoun.length);
                 var noun = typeNoun[nounIndex]
