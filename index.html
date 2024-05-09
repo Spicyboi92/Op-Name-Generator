@@ -108,28 +108,29 @@
 
             // 'Jungle', 'Swamp', 'Cajun', 'Primal', 'Silent', 'Savage'
             var tempProvinceDescArray =
-                [['Cold', 'Silent', 'Frozen', 'High', 'Glacial', 'Forbidden', 'Frigid', 'Winter', 'Snow', 'White'], // Mount Hodgson
-                ['Sinking', 'Jungle', 'Cajun', 'Tropical', 'Bootleg', 'Rainy', 'Cloudy', 'Green'], // Sinking Country
-                ['Sinking', 'Foggy', 'Swamp', 'Failing', 'Submerged', 'Green', 'Stone'], // Fen Bog
-                ['Urban', 'Rough', 'Hard', 'Steel', 'Tan', 'Black', 'Violent', 'Harsh'], // New Argyll
-                ['Silent', 'High', 'Cold', 'Frozen', 'White', 'Glacial', 'Frigid', 'Tundra'], // Silent Mountain
-                ['Wild', 'Hard', 'Harsh', 'Crazy', 'Red', 'Hot', 'Rough', 'Violent', 'Cryptic'], // Wild Coast
+                [['Cold', 'Silent', 'Bitter', 'Frozen', 'High', 'Glacial', 'Forbidden', 'Frigid', 'Winter', 'Snow', 'White'], // Mount Hodgson
+                ['Sinking', 'Jungle', 'Cajun', 'Bloody', 'Tropical', 'Bootleg', 'Rainy', 'Cloudy', 'Green'], // Smugglers Covee
+                ['Sinking', 'Jungle', 'Cajun', 'Tropical', 'Impending', 'Bootleg', 'Rainy', 'Cloudy', 'Green'], // Sinking Country
+                ['Sinking', 'Foggy', 'Swamp', 'Failing', 'Bloody', 'Feral', 'Submerged', 'Green', 'Stone'], // Fen Bog
+                ['Urban', 'Rough', 'Hard', 'Steel', 'Grey', 'Broken', 'Black', 'Terrorized', 'Harsh'], // New Argyll
+                ['Silent', 'High', 'Cold', 'Frozen', 'Bitter', 'White', 'Glacial', 'Frigid', 'Tundra'], // Silent Mountain
+                ['Wild', 'Hard', 'Harsh', 'Splintered', 'Crazy', 'Red', 'Hot', 'Rough', 'Violent', 'Cryptic'], // Wild Coast
                 ['Belligerent', 'Infinite', 'Cheating', 'Black', 'Bronze', 'Endless', 'Limitless', 'Impenetrable', 'Downtrodden'], // Infinity
-                ['Insane', 'Angered', 'Aggressive', 'Silent', 'Sleeping', 'Aware', 'Hostile'], // Whalers Bay
-                ['Pierced', 'Blue', 'Tropic', 'Hot', 'Disguised', 'Cryptic'], // Manga Nui Islands
-                ['Endless', 'Pierced', 'Gold', 'Ferocious', 'Serene', 'Green', 'Bleeding'], // Lake Counry
+                ['Insane', 'Angered', 'Aggressive', 'Silent', 'Drenched', 'Sleeping', 'Aware', 'Hostile'], // Whalers Bay
+                ['Pierced', 'Blue', 'Tropic', 'Hot', 'Bloody', 'Disguised', 'Cryptic'], // Manga Nui Islands
+                ['Endless', 'Pierced', 'Gold', 'Crushed', 'Beaten', 'Impending', 'Ferocious', 'Serene', 'Green', 'Bleeding'], // Lake Counry
                 ['Beeding', 'Wounded', 'Pounding', 'Hopeless', 'Senseless', 'Remote', 'Hidden'], // Good Hope Mountain
-                ['Relentless', 'Impaled', 'Barbaric', 'Serene', 'Gold', 'Restrained', 'Silver', 'Urban', 'Restricted', 'Tribal'], // Restricted Area 1
-                ['New', 'Dead', 'Sleeping', 'Clever', 'Bronze', 'Stone', 'Steady', 'Martyred'], // New Stirling
-                ['Old', 'Hidden', 'Secret', 'Concealed', 'Invisible', 'Shrouded', 'Bohemian'], // Channels
-                ['Scattered', 'Shattered', 'Glass', 'Shielded', 'Readied', 'Brown', 'Copper'], // Seal Islands
-                ['Freed', 'Sovereign', 'Uncaged', 'Caged', 'Confined', 'Independent', 'Tribal', 'Urban'], // Liberty
-                ['Sleeping', 'Harsh', 'Dead', 'Dying', 'Terrified', 'Bloodied', 'Wounded', 'Turqoise', ], // Cape North
-                ['Dark', 'Black', 'Hidden', 'Concealed', 'Pierced', 'Gold', 'Island', 'Lone'], // Darkwood Island
-                ['Drifting', 'Hanging', 'Swinging', 'Raised', 'Soaring', 'Blue', 'Purple', 'Mysterious'], // Driftwood Islet
+                ['Relentless', 'Impaled', 'Barbaric', 'Serene', 'Gold', 'Unchained', 'Restrained', 'Silver', 'Urban', 'Restricted', 'Tribal'], // Restricted Area 1
+                ['New', 'Dead', 'Sleeping', 'Clever', 'Iron', 'Savage', 'Vanquished', 'Bronze', 'Stone', 'Steady', 'Martyred'], // New Stirling
+                ['Ancient', 'Hidden', 'Secret', 'Splintered', 'Copper', 'Concealed', 'Invisible', 'Shrouded', 'Bohemian'], // Channels
+                ['Scattered', 'Primal', 'Shattered', 'Glass', 'Shielded', 'Readied', 'Exploited', 'Brown', 'Copper'], // Seal Islands
+                ['Freed', 'Sovereign', 'Uncaged', 'Caged', 'Confined', 'Unchained', 'Independent', 'Tribal', 'Urban'], // Liberty
+                ['Sleeping', 'Harsh', 'Dead', 'Dying', 'Impending', 'Shackled', 'Terrified', 'Bloody', 'Wounded', 'Turqoise', ], // Cape North
+                ['Dark', 'Black', 'Hidden', 'Concealed', 'Feral', 'Shattered', 'Pierced', 'Gold', 'Island', 'Lone'], // Darkwood Island
+                ['Drifting', 'Hanging', 'Swinging', 'Antagonized', 'Raised', 'Soaring', 'Blue', 'Purple', 'Mysterious'], // Driftwood Islet
                 ['Windy', 'Blowing', 'Heavy', 'Flying', 'Hushed', 'Supressed', 'Hushed', 'Noiseless', 'Peaceful'], // Windy Islands
-                ['Concealed', 'Hazy', 'Heavy', 'Foggy', 'Purple', 'Mysterious'], // Egg Islands
-                ['Red', 'Black', 'Ultimate', 'Final', 'Impending', 'Imminent', 'Nearing']]; // Golem Island
+                ['Concealed', 'Hazy', 'Heavy', 'Foggy', 'Purple', 'Mysterious', 'Broken'], // Egg Islands
+                ['Red', 'Black', 'Ultimate', 'Final', 'Unstoppable', 'Impending', 'Imminent', 'Nearing']]; // Golem Island
 
             // inclusive max and min random #: Math.floor(Math. random() * (tempProvinceDescArray[0].length - 0 + 1)) + 0;
 
@@ -139,13 +140,13 @@
                 'Relentless', 'Impaled', 'Barbaric', 'Serene', 'White', 'Restrained', 'Silver',
                 'Drenched', 'Naval', 'Independent', 'Back', 'Blue', 'Clever', 'Persistent', 'Steady', 'Martyred'];
 
-            var typeNoun = [['Assault', 'Trident', 'Death', 'Claymore', 'Warthog', 'Hand', 'Head', 'Banshee', 'Smoke'], // Direct Action
-                ['Haze', 'Dust', 'Spider', 'Giant', 'Hands', 'Razor', 'Monkey', 'Dictator', 'Horse', 'Pentacle', 'Tyrant'], // High Value Target
-                ['Violence', 'Veil', 'Savior', 'Barbarian', 'Shield', 'Salvation', 'Knife', 'Sacrifice', 'Light', 'Knight', 'Bear'], // Hostage Rescue
-                ['Bastion', 'Weapon', 'Thunder', 'Lightening', 'Charger', 'Eagle', 'Falcon', 'Artillery', 'Arms'], // Air Assault
-                ['Balista', 'Nautilus', 'Shark', 'Kraken', 'Storm', 'Guardian', 'Lighthouse', 'Siren', 'Albatross'], // Sea Assault
-                ['Krypted', 'Sender', 'Tiger', 'Sword', 'Dagger', 'Badger', 'Zebra', 'Warfare', 'Fox', 'Gorilla', 'Panther'], // Unconventional Warfare
-                ['Rabbit', 'Reaper', 'Predator', 'Hitman', 'Lion', 'Longhorn', 'Usurper', 'Oppressor', 'Breacher']]; // Raid
+            var typeNoun = [['Assault', 'Trident', 'Death', 'Claymore', 'Halberd', 'Invasion', 'Slaugher', 'Trojan', 'Warthog', 'Hand', 'Head', 'Hell','Banshee', 'Smoke'], // Direct Action
+                ['Haze', 'Dust', 'Spider', 'Giant', 'Hands', 'Razor', 'Threat', 'Spear', 'Projectile', 'Ash', 'Monkey', 'Dictator', 'Horse', 'Pentacle', 'Tyrant'], // High Value Target
+                ['Violence', 'Prisoner', 'Veil', 'Savior', 'Barbarian', 'Balista', 'Shield', 'Device', 'Fortune', 'Salvation', 'Knife', 'Sacrifice', 'Light', 'Knight', 'Bear'], // Hostage Rescue
+                ['Bastion', 'Weapon', 'Thunder', 'Strike', 'Air Strike', 'Arrow', 'Lightening', 'Charge', 'Raven', 'Eagle', 'Attack', 'Falcon', 'Artillery', 'Arms', 'Extortion'], // Air Assault
+                ['Harpoon', 'Nautilus', 'Shark', 'Kraken', 'Tentacle', 'Storm', 'Splash', 'Extortion', 'Abyss', 'Guardian', 'Lighthouse', 'Siren', 'Albatross'], // Sea Assault
+                ['Krypted', 'Sender', 'Tiger', 'Incursion', 'Sword', 'Virus', 'Dagger', 'Badger', 'Prey', 'Zebra', 'Warfare', 'Fox', 'Gorilla', 'Panther'], // Unconventional Warfare
+                ['Rabbit', 'Reaper', 'Predator', 'Hitman', 'Lion', 'Artillery', 'Longhorn', 'Agony', 'Axe', 'Lord', 'Menace', 'Usurper', 'Oppressor', 'Breacher']]; // Raid
 
             $('#next1').on("click", function () {
                 $('#next1').hide();
@@ -166,7 +167,7 @@
                 var ranNounIndex = Math.floor(Math.random() * typeNoun[nIndex].length);
                 var noun = typeNoun[nIndex][ranNounIndex]
 
-                $('#opName').text('Operation ' + verb + ' ' + noun);
+                $('#opName').text('OPERATION ' + verb.toUpperCase() + ' ' + noun.toUpperCase());
                 $('#opdiv').fadeIn(3000);
                 $('#restartBtn').fadeIn(3000);
             });
