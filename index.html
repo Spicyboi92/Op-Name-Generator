@@ -106,25 +106,24 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            // 'Jungle', 'Swamp', 'Cajun', 'Primal', 'Silent', 'Savage'
             var tempProvinceDescArray =
                 [['Cold', 'Silent', 'Bitter', 'Frozen', 'High', 'Glacial', 'Forbidden', 'Frigid', 'Winter', 'Snow', 'White'], // Mount Hodgson
-                ['Sinking', 'Jungle', 'Cajun', 'Bloody', 'Tropical', 'Bootleg', 'Rainy', 'Cloudy', 'Green'], // Smugglers Cove
+                ['Sinking', 'Jungle', 'Cajun', 'Bloody', 'Spiteful', 'Tropical', 'Bootleg', 'Rainy', 'Cloudy', 'Green'], // Smugglers Cove
                 ['Sinking', 'Jungle', 'Cajun', 'Tropical', 'Impending', 'Bootleg', 'Rainy', 'Cloudy', 'Green'], // Sinking Country
-                ['Sinking', 'Foggy', 'Swamp', 'Failing', 'Bloody', 'Feral', 'Submerged', 'Green', 'Stone'], // Fen Bog
-                ['Urban', 'Rough', 'Hard', 'Steel', 'Grey', 'Broken', 'Black', 'Terrorized', 'Harsh'], // New Argyll
-                ['Silent', 'High', 'Cold', 'Frozen', 'Bitter', 'White', 'Glacial', 'Frigid', 'Tundra'], // Silent Mountain
-                ['Wild', 'Hard', 'Harsh', 'Splintered', 'Crazy', 'Red', 'Hot', 'Rough', 'Violent', 'Cryptic'], // Wild Coast
+                ['Sinking', 'Foggy', 'Swamp', 'Failing', 'Bloody', 'Vigilant', 'Feral', 'Submerged', 'Green', 'Stone'], // Fen Bog
+                ['Urban', 'Rough', 'Hard', 'Steel', 'Grey', 'Gothic', 'Poisonous', 'Broken', 'Black', 'Terrorized', 'Harsh'], // New Argyll
+                ['Silent', 'High', 'Cold', 'Frozen', 'Bitter', 'Immortal', 'Watchful', 'White', 'Glacial', 'Frigid', 'Tundra'], // Silent Mountain
+                ['Wild', 'Hard', 'Harsh', 'Splintered', 'Crazy', 'Red', 'Malicious', 'Hot', 'Rough', 'Violent', 'Cryptic'], // Wild Coast
                 ['Belligerent', 'Infinite', 'Cheating', 'Black', 'Bronze', 'Endless', 'Limitless', 'Impenetrable', 'Downtrodden'], // Infinity
-                ['Insane', 'Angered', 'Aggressive', 'Silent', 'Drenched', 'Sleeping', 'Aware', 'Hostile'], // Whalers Bay
-                ['Pierced', 'Blue', 'Tropic', 'Hot', 'Bloody', 'Disguised', 'Cryptic'], // Manga Nui Islands
+                ['Insane', 'Angered', 'Aggressive', 'Silent', 'Drenched', 'Immoral',  'Sleeping', 'Aware', 'Hostile'], // Whalers Bay
+                ['Pierced', 'Blue', 'Tropic', 'Hot', 'Bloody', 'Gothic', 'Disguised', 'Cryptic'], // Manga Nui Islands
                 ['Endless', 'Pierced', 'Gold', 'Crushed', 'Beaten', 'Impending', 'Ferocious', 'Serene', 'Green', 'Bleeding'], // Lake Counry
-                ['Beeding', 'Wounded', 'Pounding', 'Hopeless', 'Senseless', 'Remote', 'Hidden'], // Good Hope Mountain
+                ['Beeding', 'Wounded', 'Pounding', 'Hopeless', 'Determined',  'Gothic', 'Senseless', 'Remote', 'Hidden'], // Good Hope Mountain
                 ['Relentless', 'Impaled', 'Barbaric', 'Serene', 'Gold', 'Unchained', 'Restrained', 'Silver', 'Urban', 'Restricted', 'Tribal'], // Restricted Area 1
-                ['New', 'Dead', 'Sleeping', 'Clever', 'Iron', 'Savage', 'Vanquished', 'Bronze', 'Stone', 'Steady', 'Martyred'], // New Stirling
-                ['Ancient', 'Hidden', 'Secret', 'Splintered', 'Copper', 'Concealed', 'Invisible', 'Shrouded', 'Bohemian'], // Channels
-                ['Scattered', 'Primal', 'Shattered', 'Glass', 'Shielded', 'Readied', 'Exploited', 'Brown', 'Copper'], // Seal Islands
-                ['Freed', 'Sovereign', 'Uncaged', 'Caged', 'Confined', 'Unchained', 'Independent', 'Tribal', 'Urban'], // Liberty
+                ['New', 'Dead', 'Sleeping', 'Clever', 'Iron', 'Savage', 'Toxic', 'Vanquished', 'Bronze', 'Stone', 'Steady', 'Martyred'], // New Stirling
+                ['Ancient', 'Hidden', 'Secret', 'Splintered', 'Copper', 'Druken', 'Concealed', 'Invisible', 'Shrouded', 'Bohemian'], // Channels
+                ['Scattered', 'Primal', 'Shattered', 'Glass', 'Fatal', 'Malevolent', 'Shielded', 'Readied', 'Exploited', 'Brown', 'Copper'], // Seal Islands
+                ['Freed', 'Sovereign', 'Uncaged', 'Caged', 'Confined', 'lethal', 'Unchained', 'Independent', 'Tribal', 'Urban'], // Liberty
                 ['Sleeping', 'Harsh', 'Dead', 'Dying', 'Impending', 'Shackled', 'Terrified', 'Bloody', 'Wounded', 'Turqoise', ], // Cape North
                 ['Dark', 'Black', 'Hidden', 'Concealed', 'Feral', 'Shattered', 'Pierced', 'Gold', 'Island', 'Lone'], // Darkwood Island
                 ['Drifting', 'Hanging', 'Swinging', 'Antagonized', 'Raised', 'Soaring', 'Blue', 'Purple', 'Mysterious'], // Driftwood Islet
@@ -132,21 +131,17 @@
                 ['Concealed', 'Hazy', 'Heavy', 'Foggy', 'Purple', 'Mysterious', 'Broken'], // Egg Islands
                 ['Red', 'Black', 'Ultimate', 'Final', 'Unstoppable', 'Impending', 'Imminent', 'Nearing']]; // Golem Island
 
-            // inclusive max and min random #: Math.floor(Math. random() * (tempProvinceDescArray[0].length - 0 + 1)) + 0;
-
-            // nouns add: smoke, haze, dust, spider, monkey, horse, Warfare, violence, tyrant, giant, veill, shield, sacrifice, light, night, Bastion, weapon, hand, Claymore
-            // Artilery, Storm, alert, siren, albatross, Kraken
             var provinceDesc = ['Cold', 'Jungle', 'Swamp', 'Cajun', 'Primal', 'Silent', 'Savage',
                 'Relentless', 'Impaled', 'Barbaric', 'Serene', 'White', 'Restrained', 'Silver',
                 'Drenched', 'Naval', 'Independent', 'Back', 'Blue', 'Clever', 'Persistent', 'Steady', 'Martyred'];
 
-            var typeNoun = [['Assault', 'Trident', 'Death', 'Claymore', 'Halberd', 'Invasion', 'Slaugher', 'Trojan', 'Warthog', 'Hand', 'Head', 'Hell','Banshee', 'Smoke'], // Direct Action
-                ['Haze', 'Dust', 'Spider', 'Giant', 'Hands', 'Razor', 'Threat', 'Spear', 'Projectile', 'Ash', 'Monkey', 'Dictator', 'Horse', 'Pentacle', 'Tyrant'], // High Value Target
-                ['Violence', 'Prisoner', 'Veil', 'Savior', 'Barbarian', 'Balista', 'Shield', 'Device', 'Fortune', 'Salvation', 'Knife', 'Sacrifice', 'Light', 'Knight', 'Bear'], // Hostage Rescue
+            var typeNoun = [['Assault', 'Trident', 'Death', 'Claymore', 'Halberd', 'Invasion', 'Castle', 'Venom', 'Slaugher', 'Trojan', 'Warthog', 'Hand', 'Head', 'Hell','Banshee', 'Smoke'], // Direct Action
+                ['Haze', 'Dust', 'Spider', 'Giant', 'Hands', 'Razor', 'Serpent', 'Threat', 'Spear', 'Projectile', 'Justice', 'Ash', 'Monkey', 'Dictator', 'Horse', 'Pentacle', 'Tyrant'], // High Value Target
+                ['Violence', 'Prisoner', 'Veil', 'Savior', 'Barbarian', 'Balista', 'Shield', 'Device', 'Citadel', 'Fortune', 'Salvation', 'Symbol', 'Knife', 'Sacrifice', 'Light', 'Knight', 'Bear'], // Hostage Rescue
                 ['Bastion', 'Weapon', 'Thunder', 'Strike', 'Air Strike', 'Arrow', 'Lightening', 'Charge', 'Raven', 'Eagle', 'Attack', 'Falcon', 'Artillery', 'Arms', 'Extortion'], // Air Assault
                 ['Harpoon', 'Nautilus', 'Shark', 'Kraken', 'Tentacle', 'Storm', 'Splash', 'Extortion', 'Abyss', 'Guardian', 'Lighthouse', 'Siren', 'Albatross'], // Sea Assault
-                ['Krypted', 'Sender', 'Tiger', 'Incursion', 'Sword', 'Virus', 'Dagger', 'Badger', 'Prey', 'Zebra', 'Warfare', 'Fox', 'Gorilla', 'Panther'], // Unconventional Warfare
-                ['Rabbit', 'Reaper', 'Predator', 'Hitman', 'Lion', 'Artillery', 'Longhorn', 'Agony', 'Axe', 'Lord', 'Menace', 'Usurper', 'Oppressor', 'Breacher']]; // Raid
+                ['Krypted', 'Sender', 'Tiger', 'Incursion', 'Sword', 'Virus', 'Dagger', 'Badger', 'Prey', 'Zebra', 'Tower', 'Warfare', 'Purpose', 'Fox', 'Gorilla', 'Panther'], // Unconventional Warfare
+                ['Rabbit', 'Reaper', 'Predator', 'Hitman', 'Lion', 'Artillery', 'Longhorn', 'Justice', 'Fortress', 'Agony', 'Axe', 'Lord', 'Menace', 'Usurper', 'Oppressor', 'Breacher']]; // Raid
 
             $('#next1').on("click", function () {
                 $('#next1').hide();
